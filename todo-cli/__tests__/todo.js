@@ -16,7 +16,7 @@ describe("Todo New Test Suite", () => {
       dueDate: new Date().toISOString().slice(0, 10),
     });
     add({
-      title: "Test Due Later",
+      title: "Test0",
       completed: false,
       dueDate: new Date(new Date().setDate(new Date().getDate() + 1))
         .toISOString()
@@ -37,15 +37,15 @@ describe("Todo New Test Suite", () => {
     expect(all.length).toBe(store_todo + 1);
   });
 
-  test("Should mark a todo as complete", () => {
+  test("mark as todo complete", () => {
     expect(all[0].completed).toBe(false);
     markAsComplete(0);
     expect(all[0].completed).toBe(true);
   });
 
-  test("Should check the retreive of Overdue", () => {
+  test("retreive Overdue", () => {
     add({
-      title: "Test Over Due 2",
+      title: "Test7",
       completed: false,
       dueDate: new Date(new Date().setDate(new Date().getDate() - 1))
         .toISOString()
@@ -57,9 +57,14 @@ describe("Todo New Test Suite", () => {
     ).toBe(2);
   });
 
-  test("Should check the retreive of due today", () => {
+  test("retreive of due today", () => {
     add({
-      title: "Test Due Today",
+      title: "Test 1",
+      completed: false,
+      dueDate: new Date().toISOString().slice(0, 10),
+    });
+    add({
+      title: "Today goto collage",
       completed: false,
       dueDate: new Date().toISOString().slice(0, 10),
     });
@@ -67,18 +72,19 @@ describe("Todo New Test Suite", () => {
       all.filter(
         (item) => item.dueDate === new Date().toISOString().slice(0, 10)
       ).length
-    ).toBe(2);
+    ).toBe(3);
   });
 });
 
-test("Overdue item", () => {
+test("recive Overdue item", () => {
   add({
-    title: "Test 2",
+    title: "Test2",
     completed: false,
     dueDate: new Date(new Date().setDate(new Date().getDate() + 1))
       .toISOString()
       .slice(0, 10),
   });
+
   expect(
     all.filter((item) => item.dueDate > new Date().toISOString().slice(0, 10))
       .length
